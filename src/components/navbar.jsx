@@ -17,6 +17,8 @@ import ListModal from './listModal';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    margin: 0,
+    width: '100%',
   },
   modal: {
     display: 'flex',
@@ -114,7 +116,7 @@ const Navbar = () => {
 
 
   return (
-    <AppBar color="primary">
+    <AppBar position="static" className={classes.root} color="primary">
       <Toolbar>
         <Typography variant="h6" className={classes.title} color="secondary" >
           E-Commerce

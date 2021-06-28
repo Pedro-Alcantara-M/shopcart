@@ -28,9 +28,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 145px);
   background-color: #cccccc68;
-  
 `
 
 export default Products
