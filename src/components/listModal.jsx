@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  List, 
   ListItem, 
   ListItemText, 
   ListItemAvatar, 
@@ -14,12 +13,7 @@ import AddIcon from '@material-ui/icons/Add';
 import {incrementProduct, decrementProduct} from '../helper/change-quant'
 
 const useStyles = makeStyles((theme) => ({
-  list: {
-    marginBottom: 10,
-    marginLeft: 20,
-    marginRight: 20,
-  },
-
+  
   quant: {
     display: 'flex',
     flexDirection: 'row',
@@ -34,30 +28,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const ListModal = (props) => {
   const classes = useStyles();
-  const totalPrice =  props.price * props.quant
+  const [shoppingList, setShoppingList] = useState(JSON.parse(localStorage.getItem('products')))
+
+  const handleDecrement = () => {
+    setShoppingList(decrementProduct(props.id, props.quant))
+  }
+
+  const handleIncrement = () => {
+    setShoppingList(incrementProduct(props.id, props.quant))
+  }
 
   return (
-      <List className={classes.list}>
+      <>
         <ListItem>
           <ListItemAvatar >
              <img className={classes.avatar} src={props.image} alt={props.id} />
           </ListItemAvatar>
-          <ListItemText primary={props.id} secondary={`Preço: ${props.price},00`} />
-          <ListItemText  primary={`Total: ${totalPrice},00` } />
+          <ListItemText primary={props.id} secondary={`Preço: R$ ${props.price},00`}/>
+          <ListItemText  primary={`Total: R$ ${props.totalPrice},00` } />
           <ListItemSecondaryAction className={classes.quant}>
             <ListItemText  primary={`Quant: ${props.quant}`} />
-            <IconButton  edge="end" aria-label="add">
+            <IconButton onClick={handleIncrement} edge="end" aria-label="add">
               <AddIcon />
             </IconButton>
-            <IconButton  edge="end" aria-label="delete">
+            <IconButton onClick={handleDecrement} edge="end" aria-label="delete">
               <RemoveIcon />
             </IconButton>
           </ListItemSecondaryAction>
         </ListItem>
-      </List>
+        </>
   )
 }
 

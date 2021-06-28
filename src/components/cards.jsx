@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     padding: '10px',
     margin: '20px 10px',
 
-    '& h4': {
+    '& h5': {
       margin: '5px 0'
     },
 
@@ -29,6 +29,7 @@ const useStyles = makeStyles({
     '& button':{
       fontSize: '12px',
       marginRight: 10,
+
     }
   },
   
@@ -47,7 +48,6 @@ const useStyles = makeStyles({
   }
   
 });
-
 
 const Cards = (props) => {
   const classes = useStyles();
@@ -73,13 +73,12 @@ const Cards = (props) => {
         />
           <CardContent>
             <Typography variant="h5">{props.id}</Typography>
-            <Typography variant="h4" >Valor: {props.price},00</Typography>
+            <Typography variant="h5" >Valor: R$ {props.price},00</Typography>
             <Typography variant="body2">Descrição: {props.description}</Typography>
           </CardContent>
         <CardActions>
           <form className={classes.action} noValidate autoComplete="off">
           <Button 
-            type='submit'
             variant="contained"
             color= 'primary'
             onClick={handleAdd} 
