@@ -28,7 +28,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 145px);
+  min-height: calc(100vh - 145px);
+  height: 100%;
   background-color: #cccccc68;
 `
 

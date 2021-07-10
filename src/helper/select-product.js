@@ -1,4 +1,4 @@
-const selectProduct = (id, price, quant, image) => {
+const selectProduct = (id, price, quant, image, setShoppingList) => {
   let products = localStorage.getItem('products')
   let productsArr = []
 

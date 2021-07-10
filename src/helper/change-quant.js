@@ -1,4 +1,4 @@
-const decrementProduct = (id, quant) => {
+const decrementProduct = (id, quant, setShoppingList ) => {
   let products = localStorage.getItem('products')
   let productsArr = []
 
@@ -21,9 +21,11 @@ const decrementProduct = (id, quant) => {
     })
   }
   localStorage.setItem('products', JSON.stringify(productsArr))
+  setShoppingList(productsArr)
+
 }
 
-const incrementProduct = (id, quant) => {
+const incrementProduct = (id, quant, setShoppingList) => {
   let products = localStorage.getItem('products')
   let productsArr = []
 
@@ -41,5 +43,7 @@ const incrementProduct = (id, quant) => {
     })
   }
   localStorage.setItem('products', JSON.stringify(productsArr))
+  setShoppingList(productsArr)
 }
+
 export { decrementProduct, incrementProduct }

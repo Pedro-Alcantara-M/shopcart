@@ -13,7 +13,6 @@ const ShopCart = ({ id = 'modal', onClose = () => { }}) => {
         <Close onClick={onClose} />
       </Container>
     </Modal>
-
   )
 }
 
