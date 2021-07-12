@@ -15,6 +15,7 @@ import {
 import { incrementProduct, decrementProduct } from '../helper/change-quant'
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     minHeight: 'calc(100vh - 145px)',
     padding: '10%',
+   
   },
 
   list: {
@@ -35,10 +37,21 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 20,
   },
 
+  listItem: {
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+    },
+  },
+
   quant: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      alignItems: 'start',
+    },
   },
 
   buttonGroup: {
@@ -61,6 +74,14 @@ const useStyles = makeStyles((theme) => ({
   purchase: {
     display: 'inline',
     marginLeft: 'auto',
+  },
+
+  message: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '4rem',
+    },
+
+
   },
 }));
 
@@ -106,21 +127,28 @@ const ListModal = () => {
           <Typography align='center' variant="h4">Carrinho de Compras</Typography>
           <List className={classes.list}>
             {shoppingList?.map((product) => (
-              <ListItem key={product.id}>
+              <ListItem className={classes.listItem} key={product.id}>
                 <ListItemAvatar >
                   <img className={classes.avatar} src={product.image} alt={product.id} />
                 </ListItemAvatar>
                 <ListItemText primary={product.id} secondary={`Preço: R$ ${product.price},00`} />
                 <ListItemText primary={`Total: R$ ${product.totalPrice},00`} />
-                <ListItemSecondaryAction className={classes.quant}>
+                <span className={classes.quant}>
                   <ListItemText primary={`Quant: ${product.quant}`} />
-                  <IconButton onClick={() => handleIncrement(product)} edge="end" aria-label="add">
-                    <AddIcon />
-                  </IconButton>
-                  <IconButton onClick={() => handleDecrement(product)} edge="end" aria-label="delete">
-                    <RemoveIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
+                  <span>
+                    <IconButton onClick={() => handleIncrement(product)} edge="end" aria-label="add">
+                      <AddIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleDecrement(product)} edge="end" aria-label="delete">
+                      { product.quant === 1 
+                      ?
+                        <DeleteIcon/>
+                      :
+                        <RemoveIcon />
+                      }
+                    </IconButton>
+                  </span>
+                </span>
               </ListItem>
             ))}
           </List>
@@ -144,7 +172,11 @@ const ListModal = () => {
         </>
         :
         <>
-          <Typography variant="h1"> Você não fez compras ainda! </Typography>
+          <Typography 
+          align='center' 
+          variant="h1"
+          className={classes.message}
+          > Você não fez compras ainda! </Typography>
           <Button
             onClick={handleClick}
             variant="contained"

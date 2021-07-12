@@ -12,7 +12,7 @@ import {
   TextField
 } from '@material-ui/core'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '300px',
     padding: '10px',
@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     }
   }
   
-});
+}))
 
 const Cards = (props) => {
   const classes = useStyles();

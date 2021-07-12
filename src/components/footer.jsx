@@ -8,7 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   text: {
-    marginLeft: "45%",
+    display: 'flex',
+    alignItems: 'center',
   },
 
   small: {

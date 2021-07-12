@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -9,7 +9,6 @@ import {
   IconButton,
 } from '@material-ui/core'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { changeBadge } from '../helper/change-badge'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,23 +24,17 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: '2rem',
     flexGrow: 1,
+    
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1.8rem',
+    },
   },
 }));
 
 const Navbar = () => {
   const classes = useStyles();
-  const [shoppingList, setShoppingList] = useState(JSON.parse(localStorage.getItem('products')))
-  const [quant, setQuant] = useState()
+  const shoppingList = JSON.parse(localStorage.getItem('products'))
 
-  useEffect(() => {
-    let value = 0
-     shoppingList?.map((product) => {
-       value = value + product.quant
-       changeBadge(product.id, setShoppingList)
-       return setQuant(value)
-      })
-      
-  }, [shoppingList, setQuant])
 
   return (
     <AppBar position="static" className={classes.root} color="primary">
@@ -51,7 +44,7 @@ const Navbar = () => {
         </Typography>
         <Link to="/shopcart">
           <IconButton type="button">
-            <Badge badgeContent={quant} className={classes.badge} color="error">
+            <Badge badgeContent={shoppingList ? shoppingList : 0}  variant='dot' className={classes.badge} color="error">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
