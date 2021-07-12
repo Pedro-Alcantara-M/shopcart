@@ -8,7 +8,6 @@ import {
   ListItem,
   ListItemText,
   ListItemAvatar,
-  ListItemSecondaryAction,
   IconButton,
   Typography,
 } from '@material-ui/core';
